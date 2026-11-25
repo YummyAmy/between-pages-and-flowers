@@ -163,17 +163,17 @@ a{color:#7A1F2E}a:hover{color:#4E0F1B}
 <h2 style="margin: 0 0 28px; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(34px, 3.6vw, 48px); line-height: 1.05">Every book</h2>
 <div style="overflow-x: auto; border-top: 2px solid #2A1E17">
 <div role="table" aria-label="Books on the shelf" style="min-width: 720px">
-<div role="row" style="display: grid; grid-template-columns: 48px minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 90px 110px; gap: 12px; padding: 12px 8px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5A4C; border-bottom: 1px solid #CDBB98">
+<div role="row" style="display: grid; grid-template-columns: 48px minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 90px 150px; gap: 12px; padding: 12px 8px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5A4C; border-bottom: 1px solid #CDBB98">
 <span role="columnheader">No.</span><span role="columnheader">Title</span><span role="columnheader">Author</span><span role="columnheader">Genre</span><span role="columnheader">Flower</span><span role="columnheader">Stars</span>
 </div>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="12">
-<button class="row" type="button" role="row" onClick="{{r.pick}}" style="width: 100%; display: grid; grid-template-columns: 48px minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 90px 110px; gap: 12px; padding: 14px 8px; text-align: left; border: 0; border-bottom: 1px solid #E2D5BD; background: {{r.bg}}; color: #2A1E17; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; align-items: baseline">
+<button class="row" type="button" role="row" onClick="{{r.pick}}" style="width: 100%; display: grid; grid-template-columns: 48px minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) 90px 150px; gap: 12px; padding: 14px 8px; text-align: left; border: 0; border-bottom: 1px solid #E2D5BD; background: {{r.bg}}; color: #2A1E17; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; align-items: baseline">
 <span role="cell" style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #6B5A4C">{{r.no}}</span>
 <span role="cell" style="font-family: 'Instrument Serif', Georgia, serif; font-size: 21px">{{r.title}}</span>
 <span role="cell">{{r.author}}</span>
 <span role="cell" style="font-size: 14px; color: #4A3B30">{{r.genre}}</span>
 <span role="cell" style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 18px; color: {{r.color}}">{{r.flower}}</span>
-<span role="cell" aria-label="{{r.starsLabel}}" style="letter-spacing: 2px; color: #B8862E">{{r.stars}}</span>
+<span role="cell" aria-label="{{r.starsLabel}}" style="display: inline-flex; align-items: center; gap: 6px"><span style="position: relative; display: inline-block; font-size: 14px; letter-spacing: 2px; line-height: 1; color: rgba(184,134,46,0.25)">★★★★★<span style="position: absolute; left: 0; top: 0; width: {{r.pct}}%; overflow: hidden; white-space: nowrap; color: #B8862E">★★★★★</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #6B5A4C">{{r.stars}}</span></span>
 </button>
 </sc-for>
 </div>
@@ -212,20 +212,26 @@ class Component extends DCLogic {
       orchid: { name: 'Orchid', meaning: 'rare, strange, impossible to forget', color: '#6E3470' }
     };
     var RAW = [
-      ['Stay With Me', 'Ayọ̀bámi Adébáyọ̀', 'rose', 262, 46, '#6E1C2A', '#E2C77E', '2022, 2023, 2024 and 2025', false, 'Literary fiction', 0],
-      ['The Kite Runner', 'Khaled Hosseini', 'rose', 284, 48, '#59602F', '#F3D9A4', 'September 2026', true, 'Literary fiction', 0],
-      ['And the Mountains Echoed', 'Khaled Hosseini', 'lily', 270, 46, '#3E5A6E', '#F0D9A0', '', false, 'Literary fiction', 0],
-      ['Cursed Daughters', 'Oyinkan Braithwaite', 'rose', 272, 46, '#2F5D62', '#F2E3C6', '', false, 'Literary fiction', 0],
-      ['Hotel 21', 'Senta Rich', 'rose', 236, 40, '#A9772A', '#2A1A10', '', false, 'Contemporary fiction', 0],
-      ['Middle of the Night', 'Riley Sager', 'orchid', 288, 50, '#2F4030', '#E2C77E', '', false, 'Thriller', 0],
-      ['Baby Teeth', 'Zoje Stage', 'orchid', 250, 42, '#D9C8A6', '#5E1020', '', false, 'Horror', 0],
-      ['Natural Beauty', 'Ling Ling Huang', 'orchid', 248, 40, '#D9B8A8', '#2E6B3A', '', false, 'Literary horror', 0],
-      ['The Alchemist', 'Paulo Coelho', 'lily', 232, 38, '#8A3B1E', '#F0D9A0', '', false, 'Fable', 0],
-      ['Queen Bey', 'ed. Veronica Chambers', 'lily', 276, 48, '#23304A', '#E2C77E', '', false, 'Essays', 0],
-      ['Take It Back', 'Kia Abdullah', 'lily', 258, 44, '#1F3B3A', '#E2C77E', '', false, 'Legal thriller', 0],
-      ['Next of Kin', 'Kia Abdullah', 'lily', 266, 42, '#141C2E', '#E8C46A', '', false, 'Legal thriller', 0]
+      ['Stay With Me', 'Ayọ̀bámi Adébáyọ̀', 'rose', 262, 46, '#6E1C2A', '#E2C77E', '2022, 2023, 2024 and 2025', false, 'Literary fiction', 4.7],
+      ['The Kite Runner', 'Khaled Hosseini', 'rose', 284, 48, '#59602F', '#F3D9A4', 'September 2026', true, 'Literary fiction', 5],
+      ['And the Mountains Echoed', 'Khaled Hosseini', 'lily', 270, 46, '#3E5A6E', '#F0D9A0', '', false, 'Literary fiction', 4.9],
+      ['Cursed Daughters', 'Oyinkan Braithwaite', 'rose', 272, 46, '#2F5D62', '#F2E3C6', '', false, 'Literary fiction', 4.8],
+      ['Hotel 21', 'Senta Rich', 'rose', 236, 40, '#A9772A', '#2A1A10', '', false, 'Contemporary fiction', 4.7],
+      ['The Girl with Seven Names', 'Hyeonseo Lee', 'rose', 260, 44, '#B8574A', '#F6E7CF', '', false, 'Memoir', 4.6],
+      ['Queen Bey', 'ed. Veronica Chambers', 'lily', 276, 48, '#23304A', '#E2C77E', '', false, 'Essays', 5],
+      ['Middle of the Night', 'Riley Sager', 'orchid', 288, 50, '#2F4030', '#E2C77E', '', false, 'Thriller', 4],
+      ['Baby Teeth', 'Zoje Stage', 'orchid', 250, 42, '#D9C8A6', '#5E1020', '', false, 'Horror', 4.5],
+      ['Natural Beauty', 'Ling Ling Huang', 'orchid', 248, 40, '#D9B8A8', '#2E6B3A', '', false, 'Literary horror', 4.5],
+      ['But Won\'t I Miss Me', 'Tiffany Tsao', 'orchid', 254, 40, '#C9A3B5', '#3A1E2C', '', false, 'Speculative fiction', 3.9],
+      ['Want to Know a Secret?', 'Freida McFadden', 'orchid', 270, 42, '#1C1C22', '#E9D27A', '', false, 'Psychological thriller', 3.6],
+      ['The Viper', 'Brad Meltzer', 'orchid', 286, 50, '#7C2A22', '#EBD9B5', '', false, 'Thriller', 3.7],
+      ['Take It Back', 'Kia Abdullah', 'lily', 258, 44, '#1F3B3A', '#E2C77E', '', false, 'Legal thriller', 4.6],
+      ['Next of Kin', 'Kia Abdullah', 'lily', 266, 42, '#141C2E', '#E8C46A', '', false, 'Legal thriller', 4.7],
+      ['The Associate', 'Phillip Margolin', 'lily', 264, 46, '#2E3B2A', '#E2C77E', '', false, 'Legal thriller', 4],
+      ['The Alchemist', 'Paulo Coelho', 'lily', 232, 38, '#8A3B1E', '#F0D9A0', '', false, 'Fable', 2]
     ];
-    var starsOf = function (n) { return n ? '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n) : ''; };
+    var starsOf = function (n) { return n ? String(n) : ''; };
+    var pctOf = function (n) { return Math.round(n / 5 * 1000) / 10; };
     var hits = function (r, st) { return st === 'all' || (st === 'bild' ? r[8] : r[2] === st); };
     var stem = this.state.stem, sel = this.state.book;
     var pick = function (i) { return function () { self.setState({ book: i }); }; };
@@ -242,7 +248,7 @@ class Component extends DCLogic {
     var rows = [];
     RAW.forEach(function (r, i) {
       if (hits(r, stem)) {
-        rows.push({ no: String(i + 1).padStart(2, '0'), title: r[0], author: r[1], genre: r[9] + (r[8] ? ' · bildungsroman' : ''), stars: starsOf(r[10]) || '—', starsLabel: r[10] ? r[10] + ' out of 5 stars' : 'not rated yet', flower: FLOWERS[r[2]].name, color: FLOWERS[r[2]].color, bg: i === sel ? '#EADFCC' : 'transparent', pick: pick(i) });
+        rows.push({ no: String(i + 1).padStart(2, '0'), title: r[0], author: r[1], genre: r[9] + (r[8] ? ' · bildungsroman' : ''), stars: starsOf(r[10]), pct: pctOf(r[10]), starsLabel: r[10] + ' out of 5 stars', flower: FLOWERS[r[2]].name, color: FLOWERS[r[2]].color, bg: i === sel ? '#EADFCC' : 'transparent', pick: pick(i) });
       }
     });
     var pills = [['all', 'Every book'], ['rose', 'Rose'], ['lily', 'Lily'], ['orchid', 'Orchid'], ['bild', 'Bildungsroman']].map(function (p) {
@@ -258,7 +264,7 @@ class Component extends DCLogic {
     });
     var cr = RAW[sel], cf = FLOWERS[cr[2]];
     return {
-      shelf1: all.slice(0, 6), shelf2: all.slice(6), rows: rows, pills: pills,
+      shelf1: all.slice(0, 9), shelf2: all.slice(9), rows: rows, pills: pills,
       shelfNote: stem === 'all' ? 'Pick a book or a flower.' : (stem === 'bild' ? 'Bildungsroman, my favourite.' : FLOWERS[stem].name + ': ' + FLOWERS[stem].meaning + '.')
     };
   }

@@ -430,7 +430,7 @@ Sort the shelf
 </svg>
 <div style="position: relative; border-left: 20px solid #8A5B36; border-right: 20px solid #8A5B36; background: #3E2716; background-image: radial-gradient(ellipse at 22% 0%, rgba(255,205,140,0.32), transparent 65%), repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 2px, transparent 2px 11px); box-shadow: inset 0 18px 30px -12px rgba(0,0,0,0.7), inset 10px 0 20px -10px rgba(0,0,0,0.6), inset -10px 0 20px -10px rgba(0,0,0,0.6)">
 <div style="display: flex; align-items: flex-end; gap: 5px; padding: 34px 22px 0; height: 340px; box-sizing: border-box">
-<sc-for list="{{books}}" as="b" hint-placeholder-count="12">
+<sc-for list="{{books}}" as="b" hint-placeholder-count="17">
 <button class="spine" type="button" onClick="{{b.pick}}" aria-label="{{b.aria}}" style="position: relative; flex: 0 0 auto; height: {{b.h}}px; width: {{b.w}}px; background: {{b.bg}}; color: {{b.fg}}; opacity: {{b.op}}; transform: {{b.tf}}; transform-origin: 50% 100%; border: 0; border-radius: 3px 3px 0 0; padding: 12px 0 10px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 6px; box-shadow: inset -5px 0 7px rgba(0,0,0,0.35), inset 3px 0 4px rgba(255,255,255,0.1), 0 0 0 1px rgba(0,0,0,0.25)">
 <sc-if value="{{b.bild}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="position: absolute; top: -12px; left: 50%; width: 9px; height: 30px; margin-left: -4px; background: #D9507A; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%)"></span></sc-if>
 <span aria-hidden="true" style="display: block; width: 72%; height: 5px; border-top: 1px solid {{b.gilt}}; border-bottom: 1px solid {{b.gilt}}"></span>
@@ -472,7 +472,7 @@ Sort the shelf
 <span style="font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 32px; color: #F3E7CF">{{card.title}}</span>
 <span style="font-size: 16px; color: #D9CBB2">{{card.author}}</span>
 <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #C9B595">{{card.genre}}</span>
-<sc-if value="{{card.stars}}" hint-placeholder-val="{{false}}"><span aria-label="{{card.starsLabel}}" style="font-size: 18px; letter-spacing: 2px; color: #E2C77E">{{card.stars}}</span></sc-if>
+<sc-if value="{{card.stars}}" hint-placeholder-val="{{false}}"><span role="img" aria-label="{{card.starsLabel}}" style="display: inline-flex; align-items: center; gap: 8px"><span style="position: relative; display: inline-block; font-size: 18px; letter-spacing: 2px; line-height: 1; color: rgba(226,199,126,0.3)">★★★★★<span style="position: absolute; left: 0; top: 0; width: {{card.pct}}%; overflow: hidden; white-space: nowrap; color: #E2C77E">★★★★★</span></span><span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #E2C77E">{{card.stars}}</span></span></sc-if>
 </div>
 <a href="shelf.html" style="margin-top: 40px; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: #E2C77E; font-size: 16px; font-weight: 500">See the whole shelf <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 8 H13 M9 4 L13 8 L9 12"></path></svg></a>
 </div>
@@ -600,20 +600,26 @@ class Component extends DCLogic {
     };
     // [title, author, flower, height, width, spine colour, title colour, finished, bildungsroman, genre, stars (0 = not rated yet)]
     var RAW = [
-      ['Stay With Me', 'Ayọ̀bámi Adébáyọ̀', 'rose', 262, 46, '#6E1C2A', '#E2C77E', '2022, 2023, 2024 and 2025', false, 'Literary fiction', 0],
-      ['The Kite Runner', 'Khaled Hosseini', 'rose', 284, 48, '#59602F', '#F3D9A4', 'September 2026', true, 'Literary fiction', 0],
-      ['And the Mountains Echoed', 'Khaled Hosseini', 'lily', 270, 46, '#3E5A6E', '#F0D9A0', '', false, 'Literary fiction', 0],
-      ['Cursed Daughters', 'Oyinkan Braithwaite', 'rose', 272, 46, '#2F5D62', '#F2E3C6', '', false, 'Literary fiction', 0],
-      ['Hotel 21', 'Senta Rich', 'rose', 236, 40, '#A9772A', '#2A1A10', '', false, 'Contemporary fiction', 0],
-      ['Middle of the Night', 'Riley Sager', 'orchid', 288, 50, '#2F4030', '#E2C77E', '', false, 'Thriller', 0],
-      ['Baby Teeth', 'Zoje Stage', 'orchid', 250, 42, '#D9C8A6', '#5E1020', '', false, 'Horror', 0],
-      ['Natural Beauty', 'Ling Ling Huang', 'orchid', 248, 40, '#D9B8A8', '#2E6B3A', '', false, 'Literary horror', 0],
-      ['The Alchemist', 'Paulo Coelho', 'lily', 232, 38, '#8A3B1E', '#F0D9A0', '', false, 'Fable', 0],
-      ['Queen Bey', 'ed. Veronica Chambers', 'lily', 276, 48, '#23304A', '#E2C77E', '', false, 'Essays', 0],
-      ['Take It Back', 'Kia Abdullah', 'lily', 258, 44, '#1F3B3A', '#E2C77E', '', false, 'Legal thriller', 0],
-      ['Next of Kin', 'Kia Abdullah', 'lily', 266, 42, '#141C2E', '#E8C46A', '', false, 'Legal thriller', 0]
+      ['Stay With Me', 'Ayọ̀bámi Adébáyọ̀', 'rose', 262, 46, '#6E1C2A', '#E2C77E', '2022, 2023, 2024 and 2025', false, 'Literary fiction', 4.7],
+      ['The Kite Runner', 'Khaled Hosseini', 'rose', 284, 48, '#59602F', '#F3D9A4', 'September 2026', true, 'Literary fiction', 5],
+      ['And the Mountains Echoed', 'Khaled Hosseini', 'lily', 270, 46, '#3E5A6E', '#F0D9A0', '', false, 'Literary fiction', 4.9],
+      ['Cursed Daughters', 'Oyinkan Braithwaite', 'rose', 272, 46, '#2F5D62', '#F2E3C6', '', false, 'Literary fiction', 4.8],
+      ['Hotel 21', 'Senta Rich', 'rose', 236, 40, '#A9772A', '#2A1A10', '', false, 'Contemporary fiction', 4.7],
+      ['The Girl with Seven Names', 'Hyeonseo Lee', 'rose', 260, 44, '#B8574A', '#F6E7CF', '', false, 'Memoir', 4.6],
+      ['Queen Bey', 'ed. Veronica Chambers', 'lily', 276, 48, '#23304A', '#E2C77E', '', false, 'Essays', 5],
+      ['Middle of the Night', 'Riley Sager', 'orchid', 288, 50, '#2F4030', '#E2C77E', '', false, 'Thriller', 4],
+      ['Baby Teeth', 'Zoje Stage', 'orchid', 250, 42, '#D9C8A6', '#5E1020', '', false, 'Horror', 4.5],
+      ['Natural Beauty', 'Ling Ling Huang', 'orchid', 248, 40, '#D9B8A8', '#2E6B3A', '', false, 'Literary horror', 4.5],
+      ['But Won\'t I Miss Me', 'Tiffany Tsao', 'orchid', 254, 40, '#C9A3B5', '#3A1E2C', '', false, 'Speculative fiction', 3.9],
+      ['Want to Know a Secret?', 'Freida McFadden', 'orchid', 270, 42, '#1C1C22', '#E9D27A', '', false, 'Psychological thriller', 3.6],
+      ['The Viper', 'Brad Meltzer', 'orchid', 286, 50, '#7C2A22', '#EBD9B5', '', false, 'Thriller', 3.7],
+      ['Take It Back', 'Kia Abdullah', 'lily', 258, 44, '#1F3B3A', '#E2C77E', '', false, 'Legal thriller', 4.6],
+      ['Next of Kin', 'Kia Abdullah', 'lily', 266, 42, '#141C2E', '#E8C46A', '', false, 'Legal thriller', 4.7],
+      ['The Associate', 'Phillip Margolin', 'lily', 264, 46, '#2E3B2A', '#E2C77E', '', false, 'Legal thriller', 4],
+      ['The Alchemist', 'Paulo Coelho', 'lily', 232, 38, '#8A3B1E', '#F0D9A0', '', false, 'Fable', 2]
     ];
-    var starsOf = function (n) { return n ? '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n) : ''; };
+    var starsOf = function (n) { return n ? String(n) : ''; };
+    var pctOf = function (n) { return Math.round(n / 5 * 1000) / 10; };
     var hits = function (r, s) { return s === 'all' || (s === 'bild' ? r[8] : r[2] === s); };
     var stem = this.state.stem;
     var sel = this.state.book;
@@ -671,7 +677,7 @@ class Component extends DCLogic {
       roseOp: op('rose'), lilyOp: op('lily'), orchidOp: op('orchid'),
       roseBar: bar('rose'), lilyBar: bar('lily'), orchidBar: bar('orchid'),
       books: books, pills: pills, shelfNote: shelfNote,
-      card: { title: cr[0], author: cr[1], genre: cr[9] + (cr[8] ? ' · bildungsroman' : ''), stars: starsOf(cr[10]), starsLabel: cr[10] + ' out of 5 stars' }
+      card: { title: cr[0], author: cr[1], genre: cr[9] + (cr[8] ? ' · bildungsroman' : ''), stars: starsOf(cr[10]), pct: pctOf(cr[10]), starsLabel: cr[10] + ' out of 5 stars' }
     };
   }
 }
